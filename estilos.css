@@ -1,0 +1,5978 @@
+/* =========================================================
+   ISIPad:V
+   MIDI PERFORMANCE SYSTEM
+========================================================= */
+
+:root {
+    --bg-main: #0b0d10;
+    --bg-panel: #11151a;
+    --bg-panel-2: #171c22;
+    --border: #2a3038;
+
+    --text-main: #f2f4f7;
+    --text-secondary: #8e98a5;
+    --text-dark: #68717d;
+
+    --accent: #5ee7b7;
+    --accent-2: #36c995;
+
+    --danger: #ff4d5a;
+    --warning: #ffc857;
+
+    --sustain: #a88a4b;
+
+    --radius: 8px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    background: var(--bg-main);
+    color: var(--text-main);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px;
+
+    gap: 7px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #171c22 0%,
+            #0b0d10 55%
+        );
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+.top-bar {
+    height: 54px;
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 6px 12px;
+
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+
+.brand h1 {
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+
+.brand span {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 9px;
+}
+
+
+.midi-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--danger);
+
+    box-shadow:
+        0 0 7px rgba(255, 77, 90, 0.6);
+}
+
+
+.midi-status strong {
+    font-size: 9px;
+}
+
+
+.midi-device {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+
+.daw-status {
+    display: flex;
+    gap: 4px;
+    color: var(--text-secondary);
+}
+
+
+.daw-status strong {
+    color: var(--text-main);
+}
+
+
+/* =========================================================
+   BOTÓN CONFIGURACIÓN
+========================================================= */
+
+.icon-button {
+    width: 24px;
+    height: 24px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+}
+
+
+.icon-button:hover {
+    color: var(--text-main);
+    background: var(--bg-panel-2);
+}
+
+
+/* =========================================================
+   ZONA SUPERIOR
+========================================================= */
+
+.upper-section {
+    display: grid;
+
+    grid-template-columns: 1.35fr 1fr;
+
+    gap: 7px;
+
+    min-height: 130px;
+}
+
+
+/* =========================================================
+   PANELES
+========================================================= */
+
+.panel,
+.full-width-panel {
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.panel {
+    padding: 7px 9px;
+    position: relative;
+    min-width: 0;
+}
+
+
+.full-width-panel {
+    padding: 7px 10px;
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 3px;
+}
+
+
+.panel-title h2 {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+
+    color: var(--text-secondary);
+}
+
+
+.centered-title {
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.small-button {
+    border: 1px solid #343b44;
+
+    background: #191e24;
+
+    color: #d8dde3;
+
+    height: 20px;
+
+    padding: 0 9px;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+}
+
+
+.small-button:hover {
+    background: #242b33;
+    border-color: #4a535e;
+    color: white;
+}
+
+
+.panel-action {
+    position: absolute;
+
+    top: 6px;
+    right: 8px;
+}
+
+
+/* =========================================================
+   INSTRUMENTOS
+========================================================= */
+
+.active-instruments {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-top: 7px;
+
+    padding-right: 2px;
+}
+
+
+.instrument-item {
+    min-height: 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 3px 5px;
+
+    background: var(--bg-panel-2);
+
+    border: 1px solid #252c34;
+
+    border-radius: 5px;
+}
+
+
+.instrument-name {
+    flex: 1;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.instrument-volume {
+    font-size: 8px;
+
+    color: var(--accent);
+
+    min-width: 30px;
+
+    text-align: right;
+
+    cursor: ns-resize;
+
+    user-select: none;
+}
+
+
+.instrument-delete {
+    width: 15px;
+    height: 15px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--danger);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   HOLYRICS
+========================================================= */
+
+.service-list {
+    height: 76px;
+
+    overflow-y: auto;
+
+    margin-top: 7px;
+
+    padding-right: 2px;
+}
+
+
+.service-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+.service-list::-webkit-scrollbar-thumb {
+    background: #3a424c;
+
+    border-radius: 4px;
+}
+
+
+.song-item {
+    min-height: 19px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 2px 4px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    color: #cbd1d8;
+}
+
+
+.song-item:hover {
+    background: #1b2128;
+}
+
+
+.song-item.active {
+    background: #202830;
+
+    color: var(--accent);
+}
+
+
+.song-number {
+    width: 18px;
+
+    color: var(--text-dark);
+
+    font-size: 7px;
+}
+
+
+.song-title {
+    flex: 1;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.song-delete {
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 3px;
+
+    background: transparent;
+
+    color: #727b86;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.song-delete:hover {
+    color: var(--danger);
+}
+
+
+.service-navigation {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 4px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   DRUM SAMPLE PADS
+========================================================= */
+
+.drum-panel {
+    min-height: 190px;
+    flex-shrink: 0;
+}
+
+
+.drum-pads {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-rows: repeat(2, 1fr);
+
+    gap: 7px;
+
+    height: 145px;
+}
+
+
+.drum-pad {
+    position: relative;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(61, 72, 85, 0.9),
+            rgba(24, 29, 35, 0.95)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 5px 12px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.08s ease,
+        filter 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+.drum-pad::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(94, 231, 183, 0.16),
+            rgba(80, 120, 255, 0.08),
+            rgba(255, 80, 150, 0.12)
+        );
+
+    pointer-events: none;
+}
+
+
+.drum-pad:hover {
+    filter: brightness(1.2);
+
+    border-color: rgba(94, 231, 183, 0.45);
+}
+
+
+.drum-pad:active {
+    transform: scale(0.97);
+
+    filter: brightness(1.45);
+}
+
+
+/* =========================================================
+   PERFORMANCE EFFECTS
+========================================================= */
+
+.effects-panel {
+    min-height: 104px;
+    flex-shrink: 0;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   SELECTOR INSTRUMENTS / DRUM PADS
+========================================================= */
+
+.effects-target-switch {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    margin-bottom: 5px;
+
+    transition:
+        transform 0.12s ease,
+        opacity 0.12s ease;
+}
+
+
+.effects-target-button {
+    height: 17px;
+
+    min-width: 66px;
+
+    padding: 0 7px;
+
+    border: 1px solid #343b44;
+
+    border-radius: 4px;
+
+    background: #151a20;
+
+    color: #68717d;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    line-height: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.12s ease,
+        color 0.12s ease,
+        border-color 0.12s ease,
+        box-shadow 0.12s ease,
+        transform 0.08s ease;
+}
+
+
+.effects-target-button:hover {
+    background: #20262d;
+
+    color: #cbd1d8;
+
+    border-color: #46505e;
+}
+
+
+.effects-target-button.active {
+    background: #202a29;
+
+    color: var(--accent);
+
+    border-color: var(--accent-2);
+
+    box-shadow:
+        0 0 6px rgba(94, 231, 183, 0.12);
+}
+
+
+.effects-target-button:active {
+    transform: scale(0.96);
+}
+
+
+.effects-target-switch.target-changing {
+    transform: scale(0.98);
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   CONTENEDOR DE LAS 8 PERILLAS
+========================================================= */
+
+.performance-effects {
+    display: grid;
+
+    grid-template-columns: repeat(8, 1fr);
+
+    gap: 5px;
+
+    align-items: start;
+
+    justify-items: center;
+}
+
+
+.effect-control {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 2px;
+
+    min-width: 45px;
+}
+
+
+.effect-control span {
+    font-size: 6.5px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 0.7px;
+
+    font-weight: 700;
+}
+
+
+.effect-control small {
+    font-size: 6px;
+
+    color: var(--accent);
+
+    min-height: 8px;
+
+    line-height: 8px;
+}
+
+
+/* =========================================================
+   PERILLAS
+========================================================= */
+
+.knob {
+    width: 31px;
+    height: 31px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #424a54;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #5b6570 0%,
+            #303841 30%,
+            #161b20 68%,
+            #0c0f12 100%
+        );
+
+    position: relative;
+
+    cursor: ns-resize;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    touch-action: none;
+
+    transform-origin: center center;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.08),
+        0 3px 8px rgba(0, 0, 0, 0.35);
+
+    transition:
+        border-color 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+
+.knob::after {
+    content: "";
+
+    position: absolute;
+
+    width: 2px;
+    height: 9px;
+
+    top: 4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 2px;
+
+    background: var(--accent);
+
+    pointer-events: none;
+}
+
+
+.knob:hover {
+    border-color: #5a6570;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+
+.knob:active {
+    cursor: ns-resize;
+
+    border-color: var(--accent);
+}
+
+
+/* =========================================================
+   MIDI LEARN
+========================================================= */
+
+.knob.midi-learning {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 2px rgba(94, 231, 183, 0.15),
+        0 0 12px rgba(94, 231, 183, 0.25);
+}
+
+
+/* =========================================================
+   VALORES DE LAS PERILLAS
+========================================================= */
+
+#reverb-value,
+#low-value,
+#mid-value,
+#high-value,
+#delay-value,
+#chorus-value,
+#drive-value,
+#filter-value {
+    min-width: 25px;
+
+    text-align: center;
+
+    color: var(--accent);
+
+    font-size: 6px;
+
+    line-height: 8px;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+}
+
+
+/* =========================================================
+   BARRA INFERIOR
+========================================================= */
+
+.bottom-bar {
+    min-height: 37px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 5px;
+
+    padding: 4px;
+
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    flex-shrink: 0;
+}
+
+
+.bottom-button {
+    border: 1px solid #303740;
+
+    background: #151a20;
+
+    color: #9ba4ae;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+}
+
+
+.bottom-button:hover {
+    background: #20262d;
+
+    color: white;
+
+    border-color: #46505b;
+}
+
+
+.future-feature {
+    color: #68717d;
+
+    border-style: dashed;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   MODALES
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.modal.hidden {
+    display: none;
+}
+
+
+.modal-content {
+    width: min(620px, 90vw);
+
+    max-height: 80vh;
+
+    overflow: auto;
+
+    padding: 14px;
+
+    background: #11161b;
+
+    border: 1px solid #343c46;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.modal-header h2 {
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+}
+
+
+.modal-close {
+    width: 24px;
+    height: 24px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8d96a1;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+.modal-close:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   BIBLIOTECA INSTRUMENTOS
+========================================================= */
+
+.instrument-library {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+}
+
+
+.instrument-category {
+    min-height: 42px;
+
+    border: 1px solid #303840;
+
+    background: #181e24;
+
+    color: #cbd1d8;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.instrument-category:hover {
+    border-color: var(--accent);
+
+    color: var(--accent);
+}
+
+
+.instrument-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+
+.instrument-option {
+    padding: 9px;
+
+    border: 1px solid #303840;
+
+    background: #151a20;
+
+    color: #d8dde3;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+}
+
+
+.instrument-option:hover {
+    border-color: var(--accent);
+
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   BUSCADOR HOLYRICS
+========================================================= */
+
+.song-search {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.song-search label {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+}
+
+
+.song-search input {
+    height: 32px;
+
+    border: 1px solid #343c45;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background: #0c1014;
+
+    color: white;
+
+    padding: 0 9px;
+
+    font-size: 10px;
+}
+
+
+.song-search input:focus {
+    border-color: var(--accent);
+}
+
+
+.song-search-results {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-top: 10px;
+
+    max-height: 300px;
+
+    overflow-y: auto;
+}
+
+
+.song-result {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 7px;
+
+    border: 1px solid #2c333b;
+
+    background: #171c22;
+
+    border-radius: 5px;
+}
+
+
+.song-result-name {
+    font-size: 8px;
+
+    color: #d8dde3;
+}
+
+
+.song-add-button {
+    width: 20px;
+    height: 20px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #22a86f;
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.song-add-button:hover {
+    background: #2bc784;
+}
+
+
+/* =========================================================
+   MODO CLASE
+========================================================= */
+
+.class-mode {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #10151a 0%,
+            #0c1014 100%
+        );
+
+    border: 1px solid #303842;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+
+    animation:
+        classModeOpen 0.22s ease-out;
+}
+
+
+.class-mode.hidden {
+    display: none;
+}
+
+
+@keyframes classModeOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   CABECERA MODO CLASE
+========================================================= */
+
+.class-mode-header {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 5px;
+
+    border-bottom: 1px solid #252c34;
+}
+
+
+.class-mode-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.class-mode-header span {
+    font-size: 8px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1.5px;
+}
+
+
+.class-mode-header strong {
+    font-size: 17px;
+
+    color: var(--accent);
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   INFORMACIÓN MUSICAL
+========================================================= */
+
+.class-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1.2fr
+        1.2fr
+        1fr;
+
+    gap: 6px;
+}
+
+
+.class-info-card {
+    min-height: 54px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 7px 9px;
+
+    background: #151a20;
+
+    border: 1px solid #29313a;
+
+    border-radius: 6px;
+}
+
+
+.class-info-card span {
+    font-size: 6px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+
+.class-info-card strong {
+    font-size: 11px;
+
+    color: var(--accent);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TÍTULOS DE SECCIÓN
+========================================================= */
+
+.class-section-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+}
+
+
+.class-section-title h3 {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1.2px;
+}
+
+
+.class-section-title span {
+    font-size: 6px;
+
+    color: var(--text-dark);
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   PIANO DE 61 TECLAS
+========================================================= */
+
+.virtual-keyboard {
+    position: relative;
+
+    width: 100%;
+
+    height: 170px;
+
+    display: flex;
+
+    align-items: stretch;
+
+    padding: 0 5px 5px;
+
+    background: #07090b;
+
+    border: 1px solid #343c45;
+
+    border-radius: 7px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =========================================================
+   TECLAS BLANCAS
+========================================================= */
+
+.key-white {
+    position: relative;
+
+    flex: 1 1 0;
+
+    min-width: 0;
+
+    height: 100%;
+
+    border: none;
+
+    border-right: 1px solid #777d83;
+
+    border-radius: 0 0 5px 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f7f7f5 0%,
+            #e9eaeb 70%,
+            #d7d9da 100%
+        );
+
+    color: #34383d;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 8px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    user-select: none;
+
+    transition:
+        background 0.04s linear,
+        color 0.04s linear,
+        box-shadow 0.04s linear;
+}
+
+
+.key-white:last-child {
+    border-right: none;
+}
+
+
+.key-white:hover {
+    background: #ffffff;
+}
+
+
+.key-white.active {
+    background:
+        linear-gradient(
+            180deg,
+            #72f0c3 0%,
+            #36c995 100%
+        );
+
+    color: #07100d;
+
+    box-shadow:
+        inset 0 -7px 0 rgba(0, 0, 0, 0.12),
+        0 0 12px rgba(94, 231, 183, 0.4);
+}
+
+
+.key-white.sustain {
+    background:
+        linear-gradient(
+            180deg,
+            #c5a85d 0%,
+            #927838 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        inset 0 -7px 0 rgba(0, 0, 0, 0.15),
+        0 0 10px rgba(200, 160, 70, 0.25);
+}
+
+
+/* =========================================================
+   TECLAS NEGRAS
+========================================================= */
+
+.key-black {
+    position: absolute;
+
+    top: 0;
+
+    z-index: 5;
+
+    width: 2.05%;
+
+    height: 61%;
+
+    padding: 0;
+
+    border: 1px solid #050608;
+
+    border-top: none;
+
+    border-radius: 0 0 4px 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #080a0d 0%,
+            #20252b 48%,
+            #07090b 100%
+        );
+
+    color: #8e98a5;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 6px;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    user-select: none;
+
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.key-black:hover {
+    background:
+        linear-gradient(
+            90deg,
+            #11151a 0%,
+            #343b44 48%,
+            #0b0e12 100%
+        );
+}
+
+
+.key-black.active {
+    background:
+        linear-gradient(
+            180deg,
+            #65edbc 0%,
+            #239d77 100%
+        );
+
+    color: #07100d;
+
+    box-shadow:
+        0 0 12px rgba(94, 231, 183, 0.5);
+}
+
+
+.key-black.sustain {
+    background:
+        linear-gradient(
+            180deg,
+            #c3a75e 0%,
+            #80672f 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        0 0 10px rgba(200, 160, 70, 0.35);
+}
+
+
+/* =========================================================
+   NOTAS EN TIEMPO REAL
+========================================================= */
+
+.live-notes {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    padding: 7px;
+
+    background: #0a0d10;
+
+    border: 1px solid #292f37;
+
+    border-radius: 6px;
+}
+
+
+.live-note {
+    min-width: 36px;
+
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 7px;
+
+    border-radius: 4px;
+
+    background: var(--accent);
+
+    color: #07100d;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.live-note.sustain {
+    background: var(--sustain);
+
+    color: white;
+}
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+.audio-settings {
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+
+.audio-settings label {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+}
+
+
+.audio-settings select {
+    height: 30px;
+
+    border: 1px solid #343c45;
+
+    border-radius: 5px;
+
+    background: #0c1014;
+
+    color: white;
+
+    padding: 0 7px;
+
+    outline: none;
+
+    font-size: 9px;
+}
+
+
+.audio-settings select:focus {
+    border-color: var(--accent);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .upper-section {
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+    .drum-pad {
+        font-size: 9px;
+    }
+
+    .class-info-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .system-status {
+        gap: 6px;
+    }
+
+    .daw-status {
+        display: none;
+    }
+
+    .class-info-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .virtual-keyboard {
+        height: 150px;
+
+        min-width: 760px;
+    }
+
+    .class-keyboard-section {
+        overflow-x: auto;
+    }
+
+    /* Performance Effects en pantallas pequeñas */
+    .effects-target-button {
+        min-width: 60px;
+
+        font-size: 5.5px;
+    }
+
+    .effect-control {
+        min-width: 38px;
+    }
+
+    .knob {
+        width: 29px;
+
+        height: 29px;
+    }
+
+}
+
+
+@media (max-height: 700px) {
+
+    #app {
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .top-bar {
+        height: 45px;
+        min-height: 45px;
+    }
+
+    .upper-section {
+        min-height: 110px;
+    }
+
+    .drum-panel {
+        min-height: 160px;
+    }
+
+    .drum-pads {
+        height: 120px;
+    }
+
+    .effects-panel {
+        min-height: 90px;
+    }
+
+    .knob {
+        width: 27px;
+        height: 27px;
+    }
+
+    .virtual-keyboard {
+        height: 150px;
+    }
+
+}
+
+/* =========================================================
+   CONFIGURACIÓN — SOLO INTERFAZ DE AJUSTES
+   No modifica teclado, notas, instrumentos, pads ni efectos
+   ========================================================= */
+
+/* Contenedor principal del modal de configuración */
+.settings-modal-content {
+    width: min(520px, 94vw);
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* =========================================================
+   MENÚ PRINCIPAL DE CONFIGURACIÓN
+   ========================================================= */
+
+#settings-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+    background: #111;
+}
+
+.settings-menu-button {
+    width: 100%;
+    min-height: 76px;
+
+    display: grid;
+    grid-template-columns: 42px 1fr 24px;
+    align-items: center;
+
+    padding: 12px 18px;
+
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    background: #171717;
+    color: #fff;
+
+    text-align: left;
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+.settings-menu-button:hover {
+    background: #202020;
+}
+
+.settings-menu-button:active {
+    transform: scale(0.99);
+}
+
+.settings-menu-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.settings-menu-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.settings-menu-text small {
+    color: #888;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.7px;
+}
+
+.settings-menu-arrow {
+    color: #777;
+    font-size: 28px;
+    font-weight: 300;
+    text-align: right;
+}
+
+
+/* =========================================================
+   PÁGINAS INTERNAS
+   ========================================================= */
+
+.settings-page {
+    width: 100%;
+}
+
+.settings-page.hidden {
+    display: none;
+}
+
+.settings-page-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 64px;
+    padding: 10px 16px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    background: #151515;
+}
+
+.settings-page-header > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.settings-page-header h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+.settings-page-header span {
+    color: #777;
+
+    font-size: 8px;
+    letter-spacing: 0.7px;
+}
+
+.settings-back-button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #aaa;
+
+    font-size: 27px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.settings-back-button:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+}
+
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+
+.settings-page .settings-section {
+    margin: 12px 14px;
+    padding: 13px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+
+    background: #171717;
+}
+
+.settings-page .settings-section-title {
+    margin-bottom: 9px;
+
+    color: #777;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   SELECTORES DE DISPOSITIVOS
+   ========================================================= */
+
+.settings-page .settings-device-select {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 12px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #0f0f0f;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.settings-page .settings-device-select:focus {
+    border-color: rgba(255,255,255,0.3);
+}
+
+.settings-page .settings-device-select option {
+    background: #151515;
+    color: #fff;
+}
+
+
+/* =========================================================
+   MENSAJE SIN DISPOSITIVOS
+   ========================================================= */
+
+.settings-page .settings-empty-state {
+    margin-top: 8px;
+
+    color: #666;
+
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+.settings-page .settings-empty-state.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   OPCIONES
+   ========================================================= */
+
+.settings-page .settings-option-row {
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.settings-page .settings-option-row:last-child {
+    border-bottom: 0;
+}
+
+.settings-page .settings-option-row > span {
+    color: #888;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.settings-page .settings-option-row select {
+    min-width: 130px;
+    height: 30px;
+
+    padding: 0 8px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+
+    background: #0e0e0e;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.settings-status-value {
+    color: #aaa;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   ESTADO HOLYRICS
+   ========================================================= */
+
+.settings-page .remote-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 12px;
+
+    color: #777;
+
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+.settings-page #holyrics-connection-dot {
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: #555;
+}
+
+.settings-page #holyrics-connection-dot.connected {
+    background: #35c759;
+}
+
+.settings-page #holyrics-connection-status {
+    margin-left: auto;
+
+    color: #aaa;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONEXIÓN AVANZADA
+   ========================================================= */
+
+#holyrics-advanced-settings.hidden {
+    display: none;
+}
+
+.settings-page .remote-settings-grid {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+
+    align-items: center;
+    gap: 8px;
+}
+
+.settings-page .remote-settings-grid label {
+    color: #777;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.settings-page .remote-settings-grid input {
+    width: 100%;
+    height: 34px;
+
+    padding: 0 9px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+
+    outline: none;
+
+    background: #0e0e0e;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.settings-page .remote-settings-grid input:focus {
+    border-color: rgba(255,255,255,0.25);
+}
+
+
+/* =========================================================
+   BOTONES HOLYRICS
+   ========================================================= */
+
+.settings-page .remote-actions {
+    display: flex;
+    gap: 8px;
+
+    margin: 14px;
+}
+
+.settings-page .remote-actions .small-button {
+    flex: 1;
+
+    min-height: 38px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   ISIPad:V
+   MIDI PERFORMANCE SYSTEM
+========================================================= */
+
+:root {
+    --bg-main: #0b0d10;
+    --bg-panel: #11151a;
+    --bg-panel-2: #171c22;
+    --border: #2a3038;
+
+    --text-main: #f2f4f7;
+    --text-secondary: #8e98a5;
+    --text-dark: #68717d;
+
+    --accent: #5ee7b7;
+    --accent-2: #36c995;
+
+    --danger: #ff4d5a;
+    --warning: #ffc857;
+
+    --sustain: #a88a4b;
+
+    --radius: 8px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    background: var(--bg-main);
+    color: var(--text-main);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px;
+
+    gap: 7px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #171c22 0%,
+            #0b0d10 55%
+        );
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+.top-bar {
+    height: 54px;
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 6px 12px;
+
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+
+.brand h1 {
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+
+.brand span {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 9px;
+}
+
+
+.midi-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--danger);
+
+    box-shadow:
+        0 0 7px rgba(255, 77, 90, 0.6);
+}
+
+
+.midi-status strong {
+    font-size: 9px;
+}
+
+
+.midi-device {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+
+.daw-status {
+    display: flex;
+    gap: 4px;
+    color: var(--text-secondary);
+}
+
+
+.daw-status strong {
+    color: var(--text-main);
+}
+
+
+/* =========================================================
+   BOTÓN CONFIGURACIÓN
+========================================================= */
+
+.icon-button {
+    width: 24px;
+    height: 24px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+}
+
+
+.icon-button:hover {
+    color: var(--text-main);
+    background: var(--bg-panel-2);
+}
+
+
+/* =========================================================
+   ZONA SUPERIOR
+========================================================= */
+
+.upper-section {
+    display: grid;
+
+    grid-template-columns: 1.35fr 1fr;
+
+    gap: 7px;
+
+    min-height: 130px;
+}
+
+
+/* =========================================================
+   PANELES
+========================================================= */
+
+.panel,
+.full-width-panel {
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.panel {
+    padding: 7px 9px;
+    position: relative;
+    min-width: 0;
+}
+
+
+.full-width-panel {
+    padding: 7px 10px;
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 3px;
+}
+
+
+.panel-title h2 {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+
+    color: var(--text-secondary);
+}
+
+
+.centered-title {
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.small-button {
+    border: 1px solid #343b44;
+
+    background: #191e24;
+
+    color: #d8dde3;
+
+    height: 20px;
+
+    padding: 0 9px;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+}
+
+
+.small-button:hover {
+    background: #242b33;
+    border-color: #4a535e;
+    color: white;
+}
+
+
+.panel-action {
+    position: absolute;
+
+    top: 6px;
+    right: 8px;
+}
+
+
+/* =========================================================
+   INSTRUMENTOS
+========================================================= */
+
+.active-instruments {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-top: 7px;
+
+    padding-right: 2px;
+}
+
+
+.instrument-item {
+    min-height: 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 3px 5px;
+
+    background: var(--bg-panel-2);
+
+    border: 1px solid #252c34;
+
+    border-radius: 5px;
+}
+
+
+.instrument-name {
+    flex: 1;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.instrument-volume {
+    font-size: 8px;
+
+    color: var(--accent);
+
+    min-width: 30px;
+
+    text-align: right;
+
+    cursor: ns-resize;
+
+    user-select: none;
+}
+
+
+.instrument-delete {
+    width: 15px;
+    height: 15px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--danger);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   HOLYRICS
+========================================================= */
+
+.service-list {
+    height: 76px;
+
+    overflow-y: auto;
+
+    margin-top: 7px;
+
+    padding-right: 2px;
+}
+
+
+.service-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+.service-list::-webkit-scrollbar-thumb {
+    background: #3a424c;
+
+    border-radius: 4px;
+}
+
+
+.song-item {
+    min-height: 19px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 2px 4px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    color: #cbd1d8;
+}
+
+
+.song-item:hover {
+    background: #1b2128;
+}
+
+
+.song-item.active {
+    background: #202830;
+
+    color: var(--accent);
+}
+
+
+.song-number {
+    width: 18px;
+
+    color: var(--text-dark);
+
+    font-size: 7px;
+}
+
+
+.song-title {
+    flex: 1;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.song-delete {
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 3px;
+
+    background: transparent;
+
+    color: #727b86;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.song-delete:hover {
+    color: var(--danger);
+}
+
+
+.service-navigation {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 4px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   DRUM SAMPLE PADS
+========================================================= */
+
+.drum-panel {
+    min-height: 190px;
+    flex-shrink: 0;
+}
+
+
+.drum-pads {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-rows: repeat(2, 1fr);
+
+    gap: 7px;
+
+    height: 145px;
+}
+
+
+.drum-pad {
+    position: relative;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(61, 72, 85, 0.9),
+            rgba(24, 29, 35, 0.95)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 5px 12px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.08s ease,
+        filter 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+.drum-pad::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(94, 231, 183, 0.16),
+            rgba(80, 120, 255, 0.08),
+            rgba(255, 80, 150, 0.12)
+        );
+
+    pointer-events: none;
+}
+
+
+.drum-pad:hover {
+    filter: brightness(1.2);
+
+    border-color: rgba(94, 231, 183, 0.45);
+}
+
+
+.drum-pad:active {
+    transform: scale(0.97);
+
+    filter: brightness(1.45);
+}
+
+
+/* =========================================================
+   PERFORMANCE EFFECTS
+========================================================= */
+
+.effects-panel {
+    min-height: 104px;
+    flex-shrink: 0;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   SELECTOR INSTRUMENTS / DRUM PADS
+========================================================= */
+
+.effects-target-switch {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    margin-bottom: 5px;
+
+    transition:
+        transform 0.12s ease,
+        opacity 0.12s ease;
+}
+
+
+.effects-target-button {
+    height: 17px;
+
+    min-width: 66px;
+
+    padding: 0 7px;
+
+    border: 1px solid #343b44;
+
+    border-radius: 4px;
+
+    background: #151a20;
+
+    color: #68717d;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    line-height: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.12s ease,
+        color 0.12s ease,
+        border-color 0.12s ease,
+        box-shadow 0.12s ease,
+        transform 0.08s ease;
+}
+
+
+.effects-target-button:hover {
+    background: #20262d;
+
+    color: #cbd1d8;
+
+    border-color: #46505e;
+}
+
+
+.effects-target-button.active {
+    background: #202a29;
+
+    color: var(--accent);
+
+    border-color: var(--accent-2);
+
+    box-shadow:
+        0 0 6px rgba(94, 231, 183, 0.12);
+}
+
+
+.effects-target-button:active {
+    transform: scale(0.96);
+}
+
+
+.effects-target-switch.target-changing {
+    transform: scale(0.98);
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   CONTENEDOR DE LAS 8 PERILLAS
+========================================================= */
+
+.performance-effects {
+    display: grid;
+
+    grid-template-columns: repeat(8, 1fr);
+
+    gap: 5px;
+
+    align-items: start;
+
+    justify-items: center;
+}
+
+
+.effect-control {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 2px;
+
+    min-width: 45px;
+}
+
+
+.effect-control span {
+    font-size: 6.5px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 0.7px;
+
+    font-weight: 700;
+}
+
+
+.effect-control small {
+    font-size: 6px;
+
+    color: var(--accent);
+
+    min-height: 8px;
+
+    line-height: 8px;
+}
+
+
+/* =========================================================
+   PERILLAS
+========================================================= */
+
+.knob {
+    width: 31px;
+    height: 31px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #424a54;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #5b6570 0%,
+            #303841 30%,
+            #161b20 68%,
+            #0c0f12 100%
+        );
+
+    position: relative;
+
+    cursor: ns-resize;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    touch-action: none;
+
+    transform-origin: center center;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.08),
+        0 3px 8px rgba(0, 0, 0, 0.35);
+
+    transition:
+        border-color 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+
+.knob::after {
+    content: "";
+
+    position: absolute;
+
+    width: 2px;
+    height: 9px;
+
+    top: 4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 2px;
+
+    background: var(--accent);
+
+    pointer-events: none;
+}
+
+
+.knob:hover {
+    border-color: #5a6570;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+
+.knob:active {
+    cursor: ns-resize;
+
+    border-color: var(--accent);
+}
+
+
+/* =========================================================
+   MIDI LEARN
+========================================================= */
+
+.knob.midi-learning {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 2px rgba(94, 231, 183, 0.15),
+        0 0 12px rgba(94, 231, 183, 0.25);
+}
+
+
+/* =========================================================
+   VALORES DE LAS PERILLAS
+========================================================= */
+
+#reverb-value,
+#low-value,
+#mid-value,
+#high-value,
+#delay-value,
+#chorus-value,
+#drive-value,
+#filter-value {
+    min-width: 25px;
+
+    text-align: center;
+
+    color: var(--accent);
+
+    font-size: 6px;
+
+    line-height: 8px;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+}
+
+
+/* =========================================================
+   BARRA INFERIOR
+========================================================= */
+
+.bottom-bar {
+    min-height: 37px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 5px;
+
+    padding: 4px;
+
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    flex-shrink: 0;
+}
+
+
+.bottom-button {
+    border: 1px solid #303740;
+
+    background: #151a20;
+
+    color: #9ba4ae;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+}
+
+
+.bottom-button:hover {
+    background: #20262d;
+
+    color: white;
+
+    border-color: #46505b;
+}
+
+
+.future-feature {
+    color: #68717d;
+
+    border-style: dashed;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   MODALES
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.modal.hidden {
+    display: none;
+}
+
+
+.modal-content {
+    width: min(620px, 90vw);
+
+    max-height: 80vh;
+
+    overflow: auto;
+
+    padding: 14px;
+
+    background: #11161b;
+
+    border: 1px solid #343c46;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.modal-header h2 {
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+}
+
+
+.modal-close {
+    width: 24px;
+    height: 24px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8d96a1;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+.modal-close:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   BIBLIOTECA INSTRUMENTOS
+========================================================= */
+
+.instrument-library {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+}
+
+
+.instrument-category {
+    min-height: 42px;
+
+    border: 1px solid #303840;
+
+    background: #181e24;
+
+    color: #cbd1d8;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.instrument-category:hover {
+    border-color: var(--accent);
+
+    color: var(--accent);
+}
+
+
+.instrument-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+
+.instrument-option {
+    padding: 9px;
+
+    border: 1px solid #303840;
+
+    background: #151a20;
+
+    color: #d8dde3;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+}
+
+
+.instrument-option:hover {
+    border-color: var(--accent);
+
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   BUSCADOR HOLYRICS
+========================================================= */
+
+.song-search {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.song-search label {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+}
+
+
+.song-search input {
+    height: 32px;
+
+    border: 1px solid #343c45;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background: #0c1014;
+
+    color: white;
+
+    padding: 0 9px;
+
+    font-size: 10px;
+}
+
+
+.song-search input:focus {
+    border-color: var(--accent);
+}
+
+
+.song-search-results {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-top: 10px;
+
+    max-height: 300px;
+
+    overflow-y: auto;
+}
+
+
+.song-result {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 7px;
+
+    border: 1px solid #2c333b;
+
+    background: #171c22;
+
+    border-radius: 5px;
+}
+
+
+.song-result-name {
+    font-size: 8px;
+
+    color: #d8dde3;
+}
+
+
+.song-add-button {
+    width: 20px;
+    height: 20px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #22a86f;
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.song-add-button:hover {
+    background: #2bc784;
+}
+
+
+/* =========================================================
+   MODO CLASE
+========================================================= */
+
+.class-mode {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #10151a 0%,
+            #0c1014 100%
+        );
+
+    border: 1px solid #303842;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+
+    animation:
+        classModeOpen 0.22s ease-out;
+}
+
+
+.class-mode.hidden {
+    display: none;
+}
+
+
+@keyframes classModeOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   CABECERA MODO CLASE
+========================================================= */
+
+.class-mode-header {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 5px;
+
+    border-bottom: 1px solid #252c34;
+}
+
+
+.class-mode-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.class-mode-header span {
+    font-size: 8px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1.5px;
+}
+
+
+.class-mode-header strong {
+    font-size: 17px;
+
+    color: var(--accent);
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   INFORMACIÓN MUSICAL
+========================================================= */
+
+.class-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1.2fr
+        1.2fr
+        1fr;
+
+    gap: 6px;
+}
+
+
+.class-info-card {
+    min-height: 54px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 7px 9px;
+
+    background: #151a20;
+
+    border: 1px solid #29313a;
+
+    border-radius: 6px;
+}
+
+
+.class-info-card span {
+    font-size: 6px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+
+.class-info-card strong {
+    font-size: 11px;
+
+    color: var(--accent);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TÍTULOS DE SECCIÓN
+========================================================= */
+
+.class-section-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+}
+
+
+.class-section-title h3 {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1.2px;
+}
+
+
+.class-section-title span {
+    font-size: 6px;
+
+    color: var(--text-dark);
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   PIANO DE 61 TECLAS
+========================================================= */
+
+.virtual-keyboard {
+    position: relative;
+
+    width: 100%;
+
+    height: 170px;
+
+    display: flex;
+
+    align-items: stretch;
+
+    padding: 0 5px 5px;
+
+    background: #07090b;
+
+    border: 1px solid #343c45;
+
+    border-radius: 7px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =========================================================
+   TECLAS BLANCAS
+========================================================= */
+
+.key-white {
+    position: relative;
+
+    flex: 1 1 0;
+
+    min-width: 0;
+
+    height: 100%;
+
+    border: none;
+
+    border-right: 1px solid #777d83;
+
+    border-radius: 0 0 5px 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f7f7f5 0%,
+            #e9eaeb 70%,
+            #d7d9da 100%
+        );
+
+    color: #34383d;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 8px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    user-select: none;
+
+    transition:
+        background 0.04s linear,
+        color 0.04s linear,
+        box-shadow 0.04s linear;
+}
+
+
+.key-white:last-child {
+    border-right: none;
+}
+
+
+.key-white:hover {
+    background: #ffffff;
+}
+
+
+.key-white.active {
+    background:
+        linear-gradient(
+            180deg,
+            #72f0c3 0%,
+            #36c995 100%
+        );
+
+    color: #07100d;
+
+    box-shadow:
+        inset 0 -7px 0 rgba(0, 0, 0, 0.12),
+        0 0 12px rgba(94, 231, 183, 0.4);
+}
+
+
+.key-white.sustain {
+    background:
+        linear-gradient(
+            180deg,
+            #c5a85d 0%,
+            #927838 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        inset 0 -7px 0 rgba(0, 0, 0, 0.15),
+        0 0 10px rgba(200, 160, 70, 0.25);
+}
+
+
+/* =========================================================
+   TECLAS NEGRAS
+========================================================= */
+
+.key-black {
+    position: absolute;
+
+    top: 0;
+
+    z-index: 5;
+
+    width: 2.05%;
+
+    height: 61%;
+
+    padding: 0;
+
+    border: 1px solid #050608;
+
+    border-top: none;
+
+    border-radius: 0 0 4px 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #080a0d 0%,
+            #20252b 48%,
+            #07090b 100%
+        );
+
+    color: #8e98a5;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 6px;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    user-select: none;
+
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.key-black:hover {
+    background:
+        linear-gradient(
+            90deg,
+            #11151a 0%,
+            #343b44 48%,
+            #0b0e12 100%
+        );
+}
+
+
+.key-black.active {
+    background:
+        linear-gradient(
+            180deg,
+            #65edbc 0%,
+            #239d77 100%
+        );
+
+    color: #07100d;
+
+    box-shadow:
+        0 0 12px rgba(94, 231, 183, 0.5);
+}
+
+
+.key-black.sustain {
+    background:
+        linear-gradient(
+            180deg,
+            #c3a75e 0%,
+            #80672f 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        0 0 10px rgba(200, 160, 70, 0.35);
+}
+
+
+/* =========================================================
+   NOTAS EN TIEMPO REAL
+========================================================= */
+
+.live-notes {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    padding: 7px;
+
+    background: #0a0d10;
+
+    border: 1px solid #292f37;
+
+    border-radius: 6px;
+}
+
+
+.live-note {
+    min-width: 36px;
+
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 7px;
+
+    border-radius: 4px;
+
+    background: var(--accent);
+
+    color: #07100d;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.live-note.sustain {
+    background: var(--sustain);
+
+    color: white;
+}
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+.audio-settings {
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+
+.audio-settings label {
+    font-size: 7px;
+
+    color: var(--text-secondary);
+
+    letter-spacing: 1px;
+}
+
+
+.audio-settings select {
+    height: 30px;
+
+    border: 1px solid #343c45;
+
+    border-radius: 5px;
+
+    background: #0c1014;
+
+    color: white;
+
+    padding: 0 7px;
+
+    outline: none;
+
+    font-size: 9px;
+}
+
+
+.audio-settings select:focus {
+    border-color: var(--accent);
+}
+
+
+/* =========================================================
+   RESPONSIVE PRINCIPAL
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .upper-section {
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+    .drum-pad {
+        font-size: 9px;
+    }
+
+    .class-info-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .system-status {
+        gap: 6px;
+    }
+
+    .daw-status {
+        display: none;
+    }
+
+    .class-info-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .virtual-keyboard {
+        height: 150px;
+
+        min-width: 760px;
+    }
+
+    .class-keyboard-section {
+        overflow-x: auto;
+    }
+
+    /* Performance Effects en pantallas pequeñas */
+
+    .effects-target-button {
+        min-width: 60px;
+
+        font-size: 5.5px;
+    }
+
+    .effect-control {
+        min-width: 38px;
+    }
+
+    .knob {
+        width: 29px;
+
+        height: 29px;
+    }
+
+}
+
+
+@media (max-height: 700px) {
+
+    #app {
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .top-bar {
+        height: 45px;
+        min-height: 45px;
+    }
+
+    .upper-section {
+        min-height: 110px;
+    }
+
+    .drum-panel {
+        min-height: 160px;
+    }
+
+    .drum-pads {
+        height: 120px;
+    }
+
+    .effects-panel {
+        min-height: 90px;
+    }
+
+    .knob {
+        width: 27px;
+        height: 27px;
+    }
+
+    .virtual-keyboard {
+        height: 150px;
+    }
+
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN — SOLO INTERFAZ DE AJUSTES
+   No modifica teclado, notas, instrumentos, pads ni efectos
+========================================================= */
+
+
+/* Contenedor principal del modal de configuración */
+
+.settings-modal-content {
+    width: min(520px, 94vw);
+
+    max-height: 88vh;
+
+    overflow-y: auto;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   MENÚ PRINCIPAL DE CONFIGURACIÓN
+========================================================= */
+
+#settings-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1px;
+
+    width: 100%;
+
+    background: #111;
+}
+
+
+.settings-menu-button {
+    width: 100%;
+
+    min-height: 76px;
+
+    display: grid;
+
+    grid-template-columns:
+        42px
+        1fr
+        24px;
+
+    align-items: center;
+
+    padding: 12px 18px;
+
+    border: 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+    background: #171717;
+
+    color: #fff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+.settings-menu-button:hover {
+    background: #202020;
+}
+
+
+.settings-menu-button:active {
+    transform: scale(0.99);
+}
+
+
+.settings-menu-icon {
+    font-size: 22px;
+
+    line-height: 1;
+}
+
+
+.settings-menu-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+.settings-menu-text small {
+    color: #888;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.7px;
+}
+
+
+.settings-menu-arrow {
+    color: #777;
+
+    font-size: 28px;
+
+    font-weight: 300;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   PÁGINAS INTERNAS
+========================================================= */
+
+.settings-page {
+    width: 100%;
+}
+
+
+.settings-page.hidden {
+    display: none;
+}
+
+
+.settings-page-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 64px;
+
+    padding: 10px 16px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+    background: #151515;
+}
+
+
+.settings-page-header > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.settings-page-header h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+}
+
+
+.settings-page-header span {
+    color: #777;
+
+    font-size: 8px;
+
+    letter-spacing: 0.7px;
+}
+
+
+.settings-back-button {
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #aaa;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.settings-back-button:hover {
+    background: rgba(255,255,255,0.06);
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+.settings-page .settings-section {
+    margin: 12px 14px;
+
+    padding: 13px;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 8px;
+
+    background: #171717;
+}
+
+
+.settings-page .settings-section-title {
+    margin-bottom: 9px;
+
+    color: #777;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   SELECTORES DE DISPOSITIVOS
+========================================================= */
+
+.settings-page .settings-device-select {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 12px;
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #0f0f0f;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.settings-page .settings-device-select:focus {
+    border-color:
+        rgba(255,255,255,0.3);
+}
+
+
+.settings-page .settings-device-select option {
+    background: #151515;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   MENSAJE SIN DISPOSITIVOS
+========================================================= */
+
+.settings-page .settings-empty-state {
+    margin-top: 8px;
+
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+}
+
+
+.settings-page .settings-empty-state.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   OPCIONES
+========================================================= */
+
+.settings-page .settings-option-row {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.05);
+}
+
+
+.settings-page .settings-option-row:last-child {
+    border-bottom: 0;
+}
+
+
+.settings-page .settings-option-row > span {
+    color: #888;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+}
+
+
+.settings-page .settings-option-row select {
+    min-width: 130px;
+
+    height: 30px;
+
+    padding: 0 8px;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    border-radius: 5px;
+
+    background: #0e0e0e;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 9px;
+}
+
+
+.settings-status-value {
+    color: #aaa;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   ESTADO HOLYRICS
+========================================================= */
+
+.settings-page .remote-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 12px;
+
+    color: #777;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+}
+
+
+.settings-page #holyrics-connection-dot {
+    width: 7px;
+
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: #555;
+}
+
+
+.settings-page #holyrics-connection-dot.connected {
+    background: #35c759;
+}
+
+
+.settings-page #holyrics-connection-status {
+    margin-left: auto;
+
+    color: #aaa;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONEXIÓN AVANZADA
+========================================================= */
+
+#holyrics-advanced-settings.hidden {
+    display: none;
+}
+
+
+.settings-page .remote-settings-grid {
+    display: grid;
+
+    grid-template-columns: 90px 1fr;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.settings-page .remote-settings-grid label {
+    color: #777;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+.settings-page .remote-settings-grid input {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 9px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background: #0e0e0e;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+}
+
+
+.settings-page .remote-settings-grid input:focus {
+    border-color:
+        rgba(255,255,255,0.25);
+}
+
+
+/* =========================================================
+   BOTONES HOLYRICS
+========================================================= */
+
+.settings-page .remote-actions {
+    display: flex;
+
+    gap: 8px;
+
+    margin: 14px;
+}
+
+
+.settings-page .remote-actions .small-button {
+    flex: 1;
+
+    min-height: 38px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE CONFIGURACIÓN
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .settings-modal-content {
+        width: 94vw;
+
+        max-height: 90vh;
+    }
+
+    .settings-menu-button {
+        min-height: 70px;
+
+        padding: 10px 14px;
+    }
+
+    .settings-page .settings-section {
+        margin: 10px;
+
+        padding: 11px;
+    }
+
+    .settings-option-row select {
+        min-width: 115px;
+    }
+
+}
+
+
+/* =========================================================
+   APPLE  iOS
+   ELEMENTO VISUAL — NO AFECTA EL FLEX DEL HEADER
+========================================================= */
+
+.top-bar {
+    position: relative;
+}
+
+
+.top-bar::after {
+    content: " iOS";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: block;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    line-height: 1;
+
+    letter-spacing: 1.5px;
+
+    color: var(--text-secondary);
+
+    opacity: 0.32;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   ISIPad:V
+   MIDI MAPPING / CONTROLLER EDITOR
+========================================================= */
+
+/*
+   IMPORTANTE:
+   Esta sección solamente controla la interfaz del
+   MIDI MAPPING. No modifica el motor principal.
+*/
+
+
+/* =========================================================
+   SESIONES DE LA APP
+========================================================= */
+
+.app-session {
+    width: 100%;
+}
+
+
+.app-session.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   SESIÓN MIDI MAPPING
+========================================================= */
+
+.midi-mapping-session {
+    min-height:
+        calc(100vh - 16px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #171c22 0%,
+            #0b0d10 55%
+        );
+
+    animation:
+        midiMappingOpen 0.18s ease-out;
+}
+
+
+@keyframes midiMappingOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   CABECERA MIDI MAPPING
+========================================================= */
+
+.midi-editor-header {
+
+    min-height: 62px;
+
+    display: grid;
+
+    grid-template-columns:
+        44px 1fr auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 7px 12px;
+
+    background: var(--bg-panel);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.28);
+
+    flex-shrink: 0;
+
+}
+
+
+.midi-editor-back {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid #343b44;
+
+    border-radius: 7px;
+
+    background: #151a20;
+
+    color: #cbd1d8;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        color 0.12s ease,
+        transform 0.08s ease;
+
+}
+
+
+.midi-editor-back:hover {
+
+    background: #222930;
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+}
+
+
+.midi-editor-back:active {
+
+    transform:
+        scale(0.94);
+
+}
+
+
+/* =========================================================
+   MARCA MIDI EDITOR
+========================================================= */
+
+.midi-editor-brand {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.midi-editor-brand h1 {
+
+    font-size: 17px;
+
+    line-height: 18px;
+
+    letter-spacing: 1.2px;
+
+    font-weight: 800;
+
+}
+
+
+.midi-editor-brand span {
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color:
+        var(--text-secondary);
+
+}
+
+
+/* =========================================================
+   ESTADO DEL CONTROLADOR
+========================================================= */
+
+.midi-editor-connection {
+
+    min-width: 190px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 10px;
+
+    border:
+        1px solid #2d343d;
+
+    border-radius: 7px;
+
+    background: #151a20;
+
+}
+
+
+.midi-editor-connection > div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.midi-editor-connection > div span {
+
+    font-size: 6px;
+
+    color:
+        var(--text-secondary);
+
+    letter-spacing: 1px;
+
+}
+
+
+.midi-editor-connection strong {
+
+    max-width: 160px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    font-size: 9px;
+
+    color:
+        var(--accent);
+
+}
+
+
+#mapping-status-dot.connected,
+#mapping-footer-status-dot.connected {
+
+    background:
+        var(--accent);
+
+    box-shadow:
+        0 0 8px
+        rgba(94, 231, 183, 0.65);
+
+}
+
+
+/* =========================================================
+   CONTENIDO MIDI EDITOR
+========================================================= */
+
+.midi-editor-content {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 0.85fr)
+        minmax(400px, 1.15fr);
+
+    gap: 8px;
+
+    padding-right: 2px;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #3a424c
+        transparent;
+
+}
+
+
+.midi-editor-content::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+
+.midi-editor-content::-webkit-scrollbar-thumb {
+
+    background:
+        #3a424c;
+
+    border-radius: 5px;
+
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.mapping-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    padding: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #11161b 0%,
+            #101419 100%
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.2);
+
+}
+
+
+.mapping-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.mapping-card-header > div {
+
+    min-width: 0;
+
+}
+
+
+.mapping-eyebrow {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.mapping-card h2 {
+
+    font-size: 12px;
+
+    line-height: 15px;
+
+    letter-spacing: 0.5px;
+
+    color:
+        var(--text-main);
+
+}
+
+
+/* =========================================================
+   BOTÓN PEQUEÑO MIDI EDITOR
+========================================================= */
+
+.mapping-small-button {
+
+    min-height: 25px;
+
+    padding: 0 9px;
+
+    border:
+        1px solid #343b44;
+
+    border-radius: 5px;
+
+    background: #171c22;
+
+    color: #9ba4ae;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+.mapping-small-button:hover {
+
+    background: #222930;
+
+    border-color: #525c67;
+
+    color: white;
+
+}
+
+
+.mapping-small-button:active {
+
+    transform:
+        scale(0.97);
+
+}
+
+
+.danger-button:hover {
+
+    border-color:
+        var(--danger);
+
+    color:
+        var(--danger);
+
+}
+
+
+/* =========================================================
+   SELECTOR DE DISPOSITIVO
+========================================================= */
+
+.mapping-device-select {
+
+    width: 100%;
+
+    height: 36px;
+
+    padding: 0 10px;
+
+    border:
+        1px solid #343c45;
+
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #0c1014;
+
+    color: #dce1e6;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.mapping-device-select:focus {
+
+    border-color:
+        var(--accent);
+
+}
+
+
+.mapping-device-select option {
+
+    background: #11161b;
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   ESTADO VACÍO
+========================================================= */
+
+.mapping-empty-state {
+
+    margin-top: 8px;
+
+    padding: 8px;
+
+    border:
+        1px dashed #303842;
+
+    border-radius: 5px;
+
+    color:
+        var(--text-dark);
+
+    font-size: 7px;
+
+    text-align: center;
+
+}
+
+
+.mapping-empty-state.hidden {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   TARJETA APRENDER
+========================================================= */
+
+.learn-card {
+
+    border-color:
+        #303842;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+
+}
+
+
+.learn-card.learning {
+
+    border-color:
+        var(--accent);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(94, 231, 183, 0.08),
+
+        0 0 20px
+        rgba(94, 231, 183, 0.08);
+
+}
+
+
+.mapping-description {
+
+    margin-bottom: 10px;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 7px;
+
+    line-height: 12px;
+
+}
+
+
+.learn-indicator {
+
+    min-width: 53px;
+
+    padding: 4px 6px;
+
+    border:
+        1px solid #343b44;
+
+    border-radius: 4px;
+
+    background: #151a20;
+
+    color:
+        var(--text-dark);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+
+    text-align: center;
+
+}
+
+
+.learn-indicator.active {
+
+    border-color:
+        var(--accent);
+
+    background:
+        rgba(94, 231, 183, 0.08);
+
+    color:
+        var(--accent);
+
+    box-shadow:
+        0 0 8px
+        rgba(94, 231, 183, 0.12);
+
+}
+
+
+/* =========================================================
+   BOTÓN APRENDER MIDI
+========================================================= */
+
+.mapping-learn-button {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border:
+        1px solid #39424c;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171d23,
+            #101419
+        );
+
+    color: #dce1e6;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.08s ease,
+        box-shadow 0.15s ease;
+
+}
+
+
+.mapping-learn-button:hover {
+
+    border-color:
+        var(--accent);
+
+    color:
+        var(--accent);
+
+    background:
+        #17201f;
+
+}
+
+
+.mapping-learn-button.learning {
+
+    border-color:
+        var(--accent);
+
+    color:
+        #07100d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #72f0c3,
+            #36c995
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(94, 231, 183, 0.22);
+
+}
+
+
+.mapping-learn-button:active {
+
+    transform:
+        scale(0.98);
+
+}
+
+
+.learn-icon {
+
+    font-size: 15px;
+
+}
+
+
+.mapping-learn-message {
+
+    margin-top: 8px;
+
+    min-height: 12px;
+
+    color:
+        var(--text-dark);
+
+    font-size: 6.5px;
+
+    text-align: center;
+
+    letter-spacing: 0.3px;
+
+}
+
+
+.mapping-learn-message.detected {
+
+    color:
+        var(--accent);
+
+}
+
+
+/* =========================================================
+   EDITOR DEL CONTROL DETECTADO
+========================================================= */
+
+.mapping-editor-card {
+
+    grid-column: 2;
+
+    grid-row: span 2;
+
+}
+
+
+.mapping-type-badge {
+
+    padding: 4px 7px;
+
+    border:
+        1px solid #343b44;
+
+    border-radius: 4px;
+
+    background: #171c22;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+}
+
+
+.mapping-type-badge.pad {
+
+    border-color:
+        #9d70ff;
+
+    color:
+        #b995ff;
+
+    background:
+        rgba(157, 112, 255, 0.08);
+
+}
+
+
+.mapping-type-badge.function {
+
+    border-color:
+        #ffb454;
+
+    color:
+        #ffc46d;
+
+    background:
+        rgba(255, 180, 84, 0.08);
+
+}
+
+
+.mapping-type-badge.blocked {
+
+    border-color:
+        var(--danger);
+
+    color:
+        var(--danger);
+
+    background:
+        rgba(255, 77, 90, 0.08);
+
+}
+
+
+/* =========================================================
+   ACCESO MIDI MAPPING
+   CONFIGURACIÓN → MIDI
+
+   IMPORTANTE:
+   Este bloque está completamente aislado.
+   NO modifica .settings-section ni los botones
+   generales de Configuración.
+========================================================= */
+
+#midi-mapping-access {
+
+    width: 100%;
+
+    /*
+       Estos valores sobrescriben únicamente
+       el contenedor de MIDI MAPPING.
+    */
+
+    margin: 10px 14px !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    border-radius: 0 !important;
+
+    background: transparent !important;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   TÍTULO MIDI MAPPING
+========================================================= */
+
+#midi-mapping-access
+.settings-section-title {
+
+    margin: 0 0 6px 0 !important;
+
+    padding: 0 !important;
+
+    color: #858f9a;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    line-height: 10px;
+
+}
+
+
+/* =========================================================
+   BOTÓN MIDI MAPPING
+========================================================= */
+
+#btn-open-midi-mapping {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 100%;
+
+    height: 46px;
+
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 11px;
+
+    margin: 0;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid #3a444e;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1c232a 0%,
+            #151b20 100%
+        );
+
+    color: #eef1f4;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    outline: none;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,0.035),
+
+        0 2px 8px
+        rgba(0,0,0,0.18);
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.08s ease;
+
+}
+
+
+/* =========================================================
+   ICONO
+========================================================= */
+
+#btn-open-midi-mapping
+.settings-menu-icon {
+
+    width: 26px;
+
+    height: 26px;
+
+    flex: 0 0 26px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid #46515c;
+
+    border-radius: 5px;
+
+    background:
+        #10151a;
+
+    color:
+        var(--accent);
+
+    font-size: 13px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   TEXTO
+========================================================= */
+
+#btn-open-midi-mapping
+.settings-menu-text {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 2px;
+
+    margin: 0;
+
+    padding: 0;
+
+    color: #edf0f3;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    line-height: 11px;
+
+}
+
+
+#btn-open-midi-mapping
+.settings-menu-text small {
+
+    display: block;
+
+    margin: 0;
+
+    padding: 0;
+
+    color: #7f8994;
+
+    font-size: 6px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.45px;
+
+    line-height: 8px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   FLECHA
+========================================================= */
+
+#btn-open-midi-mapping
+.settings-menu-arrow {
+
+    flex: 0 0 auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    color:
+        #7e8994;
+
+    font-size: 18px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    text-align: center;
+
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+#btn-open-midi-mapping:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #242d35 0%,
+            #1a2127 100%
+        );
+
+    border-color:
+        #56636f;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,0.045),
+
+        0 3px 12px
+        rgba(0,0,0,0.25);
+
+}
+
+
+#btn-open-midi-mapping:hover
+.settings-menu-icon {
+
+    border-color:
+        var(--accent);
+
+    background:
+        #131b1c;
+
+    color:
+        var(--accent);
+
+}
+
+
+#btn-open-midi-mapping:hover
+.settings-menu-arrow {
+
+    color:
+        var(--accent);
+
+    transform:
+        translateX(2px);
+
+}
+
+
+/* =========================================================
+   CLICK
+========================================================= */
+
+#btn-open-midi-mapping:active {
+
+    transform:
+        scale(0.992);
+
+    background:
+        #182026;
+
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+#btn-open-midi-mapping:focus-visible {
+
+    border-color:
+        var(--accent);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(94, 231, 183, 0.10);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE MIDI MAPPING
+========================================================= */
+
+@media (max-width: 480px) {
+
+    #midi-mapping-access {
+
+        margin:
+            8px 10px !important;
+
+        padding:
+            0 !important;
+
+    }
+
+
+    #btn-open-midi-mapping {
+
+        height: 44px;
+
+        min-height: 44px;
+
+        padding:
+            0 10px;
+
+        gap: 8px;
+
+    }
+
+
+    #btn-open-midi-mapping
+    .settings-menu-icon {
+
+        width: 25px;
+
+        height: 25px;
+
+        flex-basis: 25px;
+
+        font-size: 12px;
+
+    }
+
+
+    #btn-open-midi-mapping
+    .settings-menu-text {
+
+        font-size: 8.5px;
+
+    }
+
+
+    #btn-open-midi-mapping
+    .settings-menu-text small {
+
+        font-size: 5.8px;
+
+    }
+
+
+    #btn-open-midi-mapping
+    .settings-menu-arrow {
+
+        font-size: 17px;
+
+    }
+
+}

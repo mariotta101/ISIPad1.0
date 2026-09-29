@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISIPad:V</title>
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+</head>
+
+
+<body>
+
+<main id="app">
+
+
+    <!-- =====================================================
+         SESIÓN PRINCIPAL
+    ====================================================== -->
+
+    <section
+        id="main-session"
+        class="app-session"
+    >
+
+
+        <!-- =================================================
+             BARRA SUPERIOR
+        ================================================== -->
+
+        <header class="top-bar">
+
+            <div class="brand">
+
+                <h1>ISIPad:V</h1>
+
+                <span>
+                    MIDI PERFORMANCE SYSTEM
+                </span>
+
+            </div>
+
+
+            <div class="system-status">
+
+                <div class="midi-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>MIDI</span>
+
+                    <strong id="midi-status">
+                        DESCONECTADO
+                    </strong>
+
+                </div>
+
+
+                <div class="midi-device">
+
+                    <span id="midi-device">
+                        SIN DISPOSITIVO
+                    </span>
+
+                </div>
+
+
+                <div class="daw-status">
+
+                    <span>DAW:</span>
+
+                    <strong id="daw-name">
+                        ABLETON LIVE
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="btn-audio-config"
+                    class="icon-button"
+                    type="button"
+                    title="Configuración"
+                    aria-label="Configuración"
+                >
+                    ⚙
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             INSTRUMENTOS + HOLYRICS
+        ================================================== -->
+
+        <section class="upper-section">
+
+
+            <!-- =================================================
+                 INSTRUMENTOS
+            ================================================== -->
+
+            <section class="panel instruments-panel">
+
+                <div class="panel-title">
+
+                    <h2>
+                        INSTRUMENTS
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="btn-add-instrument"
+                    class="small-button panel-action"
+                    type="button"
+                >
+                    ADD
+                </button>
+
+
+                <div
+                    id="active-instruments"
+                    class="active-instruments"
+                >
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 HOLYRICS
+            ================================================== -->
+
+            <section class="panel holyrics-panel">
+
+                <div class="panel-title">
+
+                    <h2>
+                        SERVICIO / HOLYRICS
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="btn-add-song"
+                    class="small-button panel-action"
+                    type="button"
+                >
+                    ADD
+                </button>
+
+
+                <div
+                    id="service-list"
+                    class="service-list"
+                >
+                </div>
+
+
+                <div class="service-navigation">
+
+                    <button
+                        id="btn-previous-song"
+                        class="small-button"
+                        type="button"
+                    >
+                        ANTERIOR
+                    </button>
+
+
+                    <button
+                        id="btn-next-song"
+                        class="small-button"
+                        type="button"
+                    >
+                        SIGUIENTE
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DRUM SAMPLE PADS
+        ====================================================== -->
+
+        <section
+            class="full-width-panel drum-panel"
+        >
+
+            <div class="panel-title centered-title">
+
+                <h2>
+                    DRUM SAMPLE PADS
+                </h2>
+
+            </div>
+
+
+            <div
+                id="drum-pads"
+                class="drum-pads"
+            >
+
+                <button
+                    class="drum-pad"
+                    id="pad-kick"
+                    data-pad="kick"
+                    type="button"
+                >
+                    KICK
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-snare"
+                    data-pad="snare"
+                    type="button"
+                >
+                    SNARE
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-hihat"
+                    data-pad="hihat"
+                    type="button"
+                >
+                    HI-HAT
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-clap"
+                    data-pad="clap"
+                    type="button"
+                >
+                    CLAP
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-user-1"
+                    data-pad="user1"
+                    type="button"
+                >
+                    USER 1
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-user-2"
+                    data-pad="user2"
+                    type="button"
+                >
+                    USER 2
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-user-3"
+                    data-pad="user3"
+                    type="button"
+                >
+                    USER 3
+                </button>
+
+
+                <button
+                    class="drum-pad"
+                    id="pad-user-4"
+                    data-pad="user4"
+                    type="button"
+                >
+                    USER 4
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PERFORMANCE EFFECTS
+        ====================================================== -->
+
+        <section
+            class="full-width-panel effects-panel"
+        >
+
+            <div class="panel-title centered-title">
+
+                <h2>
+                    PERFORMANCE EFFECTS
+                </h2>
+
+            </div>
+
+
+            <div class="effects-target-switch">
+
+                <button
+                    id="effects-target-instruments"
+                    class="effects-target-button active"
+                    type="button"
+                >
+                    INSTRUMENTS
+                </button>
+
+
+                <button
+                    id="effects-target-drums"
+                    class="effects-target-button"
+                    type="button"
+                >
+                    DRUM PADS
+                </button>
+
+            </div>
+
+
+
+            <div class="performance-effects">
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-reverb"
+                        type="button"
+                        aria-label="Reverb"
+                    >
+                    </button>
+
+                    <span>REV</span>
+
+                    <small id="reverb-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-low"
+                        type="button"
+                        aria-label="Low"
+                    >
+                    </button>
+
+                    <span>LOW</span>
+
+                    <small id="low-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-mid"
+                        type="button"
+                        aria-label="Mid"
+                    >
+                    </button>
+
+                    <span>MID</span>
+
+                    <small id="mid-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-high"
+                        type="button"
+                        aria-label="High"
+                    >
+                    </button>
+
+                    <span>HIGH</span>
+
+                    <small id="high-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-delay"
+                        type="button"
+                        aria-label="Delay"
+                    >
+                    </button>
+
+                    <span>DELAY</span>
+
+                    <small id="delay-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-chorus"
+                        type="button"
+                        aria-label="Chorus"
+                    >
+                    </button>
+
+                    <span>CHORUS</span>
+
+                    <small id="chorus-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-drive"
+                        type="button"
+                        aria-label="Drive"
+                    >
+                    </button>
+
+                    <span>DRIVE</span>
+
+                    <small id="drive-value">
+                        50%
+                    </small>
+
+                </div>
+
+
+
+                <div class="effect-control">
+
+                    <button
+                        class="knob"
+                        id="knob-filter"
+                        type="button"
+                        aria-label="Filter"
+                    >
+                    </button>
+
+                    <span>FILTER</span>
+
+                    <small id="filter-value">
+                        50%
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BARRA INFERIOR
+        ====================================================== -->
+
+        <footer class="bottom-bar">
+
+
+            <button
+                id="memory-1"
+                class="bottom-button"
+                type="button"
+            >
+                MEM 1
+            </button>
+
+
+            <button
+                id="memory-2"
+                class="bottom-button"
+                type="button"
+            >
+                MEM 2
+            </button>
+
+
+            <button
+                id="memory-3"
+                class="bottom-button"
+                type="button"
+            >
+                MEM 3
+            </button>
+
+
+            <!-- MIDI MAPPING YA NO VA AQUÍ -->
+
+
+            <button
+                id="btn-class-mode"
+                class="bottom-button"
+                type="button"
+            >
+                MODO CLASE
+            </button>
+
+        </footer>
+
+
+
+        <!-- =====================================================
+             MODO CLASE
+        ====================================================== -->
+
+        <section
+            id="class-mode"
+            class="class-mode hidden"
+        >
+
+            <div class="class-mode-header">
+
+                <div class="class-mode-title">
+
+                    <span>
+                        MODO CLASE
+                    </span>
+
+                    <strong id="detected-chord">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="close-class-mode"
+                    class="modal-close"
+                    type="button"
+                    aria-label="Cerrar Modo Clase"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="class-info-grid">
+
+                <div class="class-info-card">
+
+                    <span>
+                        NOTAS ACTIVAS
+                    </span>
+
+                    <strong id="detected-notes">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info-card">
+
+                    <span>
+                        ACORDE
+                    </span>
+
+                    <strong id="chord-name">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info-card">
+
+                    <span>
+                        EXTENSIONES
+                    </span>
+
+                    <strong id="chord-extensions">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info-card">
+
+                    <span>
+                        INVERSIÓN
+                    </span>
+
+                    <strong id="chord-inversion">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <section class="class-keyboard-section">
+
+                <div class="class-section-title">
+
+                    <h3>
+                        PIANO
+                    </h3>
+
+                    <span id="sustain-status">
+                        SUSTAIN OFF
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="virtual-keyboard"
+                    class="virtual-keyboard"
+                    aria-label="Piano virtual de 61 teclas"
+                >
+                </div>
+
+            </section>
+
+
+
+            <section class="live-notes-section">
+
+                <div class="class-section-title">
+
+                    <h3>
+                        NOTAS EN TIEMPO REAL
+                    </h3>
+
+                    <span id="live-note-count">
+                        0 NOTAS
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="live-notes"
+                    class="live-notes"
+                >
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MODAL — ADD INSTRUMENT
+        ====================================================== -->
+
+        <div
+            id="instrument-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>
+                        ADD INSTRUMENT
+                    </h2>
+
+
+                    <button
+                        id="close-instrument-modal"
+                        class="modal-close"
+                        type="button"
+                        aria-label="Cerrar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+
+                <div class="instrument-library">
+
+                    <button
+                        class="instrument-category"
+                        data-category="pianos"
+                        type="button"
+                    >
+                        PIANOS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="synths"
+                        type="button"
+                    >
+                        SYNTHS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="pads"
+                        type="button"
+                    >
+                        PADS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="guitars"
+                        type="button"
+                    >
+                        GUITARS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="brass"
+                        type="button"
+                    >
+                        BRASS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="sax"
+                        type="button"
+                    >
+                        SAX
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="leads"
+                        type="button"
+                    >
+                        LEADS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="strings"
+                        type="button"
+                    >
+                        STRINGS
+                    </button>
+
+
+                    <button
+                        class="instrument-category"
+                        data-category="organ"
+                        type="button"
+                    >
+                        ORGAN
+                    </button>
+
+                </div>
+
+
+
+                <div
+                    id="instrument-options"
+                    class="instrument-options"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             MODAL — AGREGAR CANCIÓN
+        ====================================================== -->
+
+        <div
+            id="song-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>
+                        AGREGAR CANCIÓN
+                    </h2>
+
+
+                    <button
+                        id="close-song-modal"
+                        class="modal-close"
+                        type="button"
+                        aria-label="Cerrar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+
+                <div class="song-search">
+
+                    <label for="song-search-input">
+                        BUSCAR CANCIÓN
+                    </label>
+
+
+                    <input
+                        id="song-search-input"
+                        type="search"
+                        placeholder="Escribe el nombre..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+
+                <div
+                    id="song-search-results"
+                    class="song-search-results"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             MODAL — CONFIGURACIÓN
+        ====================================================== -->
+
+        <div
+            id="audio-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content settings-modal-content">
+
+
+                <div class="modal-header">
+
+                    <h2>
+                        CONFIGURACIÓN
+                    </h2>
+
+
+                    <button
+                        id="close-audio-modal"
+                        class="modal-close"
+                        type="button"
+                        aria-label="Cerrar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MENÚ PRINCIPAL DE CONFIGURACIÓN
+                ================================================== -->
+
+                <div
+                    id="settings-menu"
+                    class="settings-menu"
+                >
+
+                    <button
+                        id="settings-midi-button"
+                        class="settings-menu-button"
+                        type="button"
+                    >
+
+                        <span class="settings-menu-icon">
+                            🎹
+                        </span>
+
+
+                        <span class="settings-menu-text">
+
+                            MIDI
+
+                            <small>
+                                TECLADOS Y CONTROLADORES
+                            </small>
+
+                        </span>
+
+
+                        <span class="settings-menu-arrow">
+                            ›
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        id="settings-audio-button"
+                        class="settings-menu-button"
+                        type="button"
+                    >
+
+                        <span class="settings-menu-icon">
+                            🎧
+                        </span>
+
+
+                        <span class="settings-menu-text">
+
+                            AUDIO
+
+                            <small>
+                                ENTRADA Y SALIDA
+                            </small>
+
+                        </span>
+
+
+                        <span class="settings-menu-arrow">
+                            ›
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        id="settings-holyrics-button"
+                        class="settings-menu-button"
+                        type="button"
+                    >
+
+                        <span class="settings-menu-icon">
+                            🖥️
+                        </span>
+
+
+                        <span class="settings-menu-text">
+
+                            REMOTE HOLYRICS
+
+                            <small>
+                                CONEXIÓN CON HOLYRICS
+                            </small>
+
+                        </span>
+
+
+                        <span class="settings-menu-arrow">
+                            ›
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MIDI
+                ================================================== -->
+
+                <section
+                    id="settings-midi"
+                    class="settings-page hidden"
+                >
+
+                    <div class="settings-page-header">
+
+                        <button
+                            id="settings-midi-back"
+                            class="settings-back-button"
+                            type="button"
+                            aria-label="Volver"
+                        >
+                            ‹
+                        </button>
+
+
+                        <div>
+
+                            <h3>
+                                MIDI
+                            </h3>
+
+                            <span>
+                                TECLADOS Y CONTROLADORES
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONTROLADOR -->
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-title">
+                            CONTROLADOR MIDI
+                        </div>
+
+
+                        <select
+                            id="midi-device-select"
+                            class="settings-device-select"
+                        >
+
+                            <option value="">
+                                SELECCIONAR CONTROLADOR
+                            </option>
+
+                        </select>
+
+
+                        <div
+                            id="midi-device-empty"
+                            class="settings-empty-state"
+                        >
+                            NO SE DETECTAN DISPOSITIVOS MIDI
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CANAL MIDI / ESTADO -->
+
+                    <div class="settings-section midi-secondary-settings">
+
+                        <div class="settings-option-row">
+
+                            <span>
+                                CANAL MIDI
+                            </span>
+
+
+                            <select
+                                id="midi-channel"
+                            >
+
+                                <option value="all">
+                                    TODOS
+                                </option>
+
+                                <option value="1">CANAL 1</option>
+                                <option value="2">CANAL 2</option>
+                                <option value="3">CANAL 3</option>
+                                <option value="4">CANAL 4</option>
+                                <option value="5">CANAL 5</option>
+                                <option value="6">CANAL 6</option>
+                                <option value="7">CANAL 7</option>
+                                <option value="8">CANAL 8</option>
+                                <option value="9">CANAL 9</option>
+                                <option value="10">CANAL 10</option>
+                                <option value="11">CANAL 11</option>
+                                <option value="12">CANAL 12</option>
+                                <option value="13">CANAL 13</option>
+                                <option value="14">CANAL 14</option>
+                                <option value="15">CANAL 15</option>
+                                <option value="16">CANAL 16</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="settings-option-row">
+
+                            <span>
+                                ESTADO
+                            </span>
+
+
+                            <strong
+                                id="midi-settings-status"
+                                class="settings-status-value"
+                            >
+                                DESCONECTADO
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NUEVO ACCESO AL MIDI MAPPING
+                    ================================================== -->
+
+                    <div class="settings-section midi-mapping-access">
+
+                        <div class="settings-section-title">
+                            EDITOR MIDI
+                        </div>
+
+
+                        <div class="midi-mapping-access-info">
+
+                            <div class="midi-mapping-access-icon">
+                                🎛️
+                            </div>
+
+
+                            <div class="midi-mapping-access-text">
+
+                                <strong>
+                                    MIDI MAPPING
+                                </strong>
+
+                                <small>
+                                    Asigna teclas, pads y controles
+                                    a funciones de isiPad.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            id="btn-open-midi-mapping"
+                            class="midi-mapping-access-button"
+                            type="button"
+                        >
+                            ABRIR MIDI MAPPING
+                            <span>›</span>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     AUDIO
+                ================================================== -->
+
+                <section
+                    id="settings-audio"
+                    class="settings-page hidden"
+                >
+
+                    <div class="settings-page-header">
+
+                        <button
+                            id="settings-audio-back"
+                            class="settings-back-button"
+                            type="button"
+                            aria-label="Volver"
+                        >
+                            ‹
+                        </button>
+
+
+                        <div>
+
+                            <h3>
+                                AUDIO
+                            </h3>
+
+                            <span>
+                                ENTRADA Y SALIDA
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-title">
+                            ENTRADA
+                        </div>
+
+
+                        <select
+                            id="audio-input"
+                            class="settings-device-select"
+                        >
+
+                            <option value="">
+                                SELECCIONAR ENTRADA
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-title">
+                            SALIDA
+                        </div>
+
+
+                        <select
+                            id="audio-output"
+                            class="settings-device-select"
+                        >
+
+                            <option value="">
+                                SELECCIONAR SALIDA
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-option-row">
+
+                            <span>
+                                AUDIO
+                            </span>
+
+
+                            <strong
+                                id="audio-engine-status"
+                                class="settings-status-value"
+                            >
+                                INACTIVO
+                            </strong>
+
+                        </div>
+
+
+                        <div class="settings-option-row">
+
+                            <span>
+                                INTERFAZ
+                            </span>
+
+
+                            <strong
+                                id="audio-interface-status"
+                                class="settings-status-value"
+                            >
+                                NO DETECTADA
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     REMOTE HOLYRICS
+                ================================================== -->
+
+                <section
+                    id="settings-holyrics"
+                    class="settings-page hidden"
+                >
+
+                    <div class="settings-page-header">
+
+                        <button
+                            id="settings-holyrics-back"
+                            class="settings-back-button"
+                            type="button"
+                            aria-label="Volver"
+                        >
+                            ‹
+                        </button>
+
+
+                        <div>
+
+                            <h3>
+                                REMOTE HOLYRICS
+                            </h3>
+
+                            <span>
+                                CONEXIÓN CON HOLYRICS
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-title">
+                            CONEXIÓN
+                        </div>
+
+
+                        <select
+                            id="holyrics-connection-select"
+                            class="settings-device-select"
+                        >
+
+                            <option value="">
+                                SELECCIONAR CONEXIÓN
+                            </option>
+
+                            <option value="desktop">
+                                HOLYRICS DESKTOP
+                            </option>
+
+                        </select>
+
+
+                        <div class="remote-status">
+
+                            <span
+                                id="holyrics-connection-dot"
+                                class="status-dot"
+                            ></span>
+
+
+                            <span>
+                                ESTADO
+                            </span>
+
+
+                            <strong id="holyrics-connection-status">
+                                DESCONECTADO
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div
+                        id="holyrics-advanced-settings"
+                        class="settings-section hidden"
+                    >
+
+                        <div class="settings-section-title">
+                            CONEXIÓN AVANZADA
+                        </div>
+
+
+                        <div class="remote-settings-grid">
+
+                            <label for="holyrics-host">
+                                HOST / IP
+                            </label>
+
+
+                            <input
+                                id="holyrics-host"
+                                type="text"
+                                placeholder="192.168.1.100"
+                                autocomplete="off"
+                            >
+
+
+                            <label for="holyrics-port">
+                                PUERTO
+                            </label>
+
+
+                            <input
+                                id="holyrics-port"
+                                type="number"
+                                placeholder="Puerto"
+                                min="1"
+                                max="65535"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-option-row">
+
+                            <span>
+                                PROGRAMA
+                            </span>
+
+
+                            <strong
+                                id="holyrics-desktop-status"
+                                class="settings-status-value"
+                            >
+                                ESPERANDO CONEXIÓN
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="remote-actions">
+
+                        <button
+                            id="btn-holyrics-connect"
+                            class="small-button"
+                            type="button"
+                        >
+                            CONECTAR
+                        </button>
+
+
+                        <button
+                            id="btn-holyrics-disconnect"
+                            class="small-button"
+                            type="button"
+                        >
+                            DESCONECTAR
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SESIÓN MIDI MAPPING / MIDI EDITOR
+    ====================================================== -->
+
+    <section
+        id="midi-mapping-session"
+        class="app-session midi-mapping-session hidden"
+    >
+
+
+        <!-- =================================================
+             CABECERA MIDI MAPPING
+        ================================================== -->
+
+        <header class="midi-editor-header">
+
+
+            <button
+                id="btn-back-to-main"
+                class="midi-editor-back"
+                type="button"
+                aria-label="Volver a isiPad"
+            >
+                ←
+            </button>
+
+
+            <div class="midi-editor-brand">
+
+                <h1>
+                    MIDI MAPPING
+                </h1>
+
+                <span>
+                    CONTROLLER EDITOR
+                </span>
+
+            </div>
+
+
+            <div class="midi-editor-connection">
+
+                <span
+                    id="mapping-status-dot"
+                    class="status-dot"
+                ></span>
+
+
+                <div>
+
+                    <span>
+                        DISPOSITIVO
+                    </span>
+
+                    <strong id="mapping-device-name">
+                        SIN DISPOSITIVO
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             CUERPO PRINCIPAL
+        ================================================== -->
+
+        <div class="midi-editor-content">
+
+
+            <!-- =================================================
+                 DISPOSITIVO MIDI
+            ================================================== -->
+
+            <section class="mapping-card device-card">
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            CONTROLADOR MIDI
+                        </span>
+
+                        <h2>
+                            Dispositivo conectado
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="btn-refresh-midi-devices"
+                        class="mapping-small-button"
+                        type="button"
+                    >
+                        ↻ ACTUALIZAR
+                    </button>
+
+                </div>
+
+
+                <select
+                    id="mapping-midi-device"
+                    class="mapping-device-select"
+                >
+
+                    <option value="">
+                        SELECCIONAR DISPOSITIVO MIDI
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="mapping-no-device"
+                    class="mapping-empty-state"
+                >
+                    Conecta un teclado o controlador MIDI para comenzar.
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 APRENDER MIDI
+            ================================================== -->
+
+            <section
+                id="mapping-learn-card"
+                class="mapping-card learn-card"
+            >
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            CONFIGURACIÓN INTELIGENTE
+                        </span>
+
+                        <h2>
+                            Aprender MIDI
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="mapping-learn-indicator"
+                        class="learn-indicator"
+                    >
+                        INACTIVO
+                    </span>
+
+                </div>
+
+
+                <p class="mapping-description">
+                    Activa el aprendizaje y toca cualquier tecla,
+                    pad o control de tu teclado.
+                </p>
+
+
+                <button
+                    id="btn-midi-learn"
+                    class="mapping-learn-button"
+                    type="button"
+                >
+
+                    <span class="learn-icon">
+                        🎯
+                    </span>
+
+                    <span>
+                        APRENDER MIDI
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="mapping-learn-message"
+                    class="mapping-learn-message"
+                >
+                    Presiona "APRENDER MIDI" para comenzar.
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ELEMENTO DETECTADO + EDICIÓN
+            ================================================== -->
+
+            <section
+                id="mapping-editor-card"
+                class="mapping-card mapping-editor-card"
+            >
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            CONTROL DETECTADO
+                        </span>
+
+                        <h2 id="mapping-detected-title">
+                            Esperando MIDI
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="mapping-detected-type"
+                        class="mapping-type-badge"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div class="mapping-values-grid">
+
+                    <div class="mapping-value-box">
+
+                        <span>
+                            MIDI ORIGINAL
+                        </span>
+
+                        <strong id="mapping-original-value">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="mapping-value-arrow">
+                        →
+                    </div>
+
+
+                    <div class="mapping-value-box virtual-value">
+
+                        <span>
+                            MIDI ISIPAD
+                        </span>
+
+                        <strong id="mapping-virtual-value">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FUNCIÓN -->
+
+                <div class="mapping-field">
+
+                    <label for="mapping-function">
+                        FUNCIÓN
+                    </label>
+
+
+                    <select
+                        id="mapping-function"
+                        class="mapping-select"
+                    >
+
+                        <option value="normal">
+                            🎹 NOTA NORMAL
+                        </option>
+
+                        <option value="pad-auto">
+                            🎛️ PAD AUTOMÁTICO
+                        </option>
+
+                        <option value="pad-1">
+                            🎛️ PAD 1
+                        </option>
+
+                        <option value="pad-2">
+                            🎛️ PAD 2
+                        </option>
+
+                        <option value="pad-3">
+                            🎛️ PAD 3
+                        </option>
+
+                        <option value="pad-4">
+                            🎛️ PAD 4
+                        </option>
+
+                        <option value="pad-5">
+                            🎛️ PAD 5
+                        </option>
+
+                        <option value="pad-6">
+                            🎛️ PAD 6
+                        </option>
+
+                        <option value="pad-7">
+                            🎛️ PAD 7
+                        </option>
+
+                        <option value="pad-8">
+                            🎛️ PAD 8
+                        </option>
+
+                        <option value="next-preset">
+                            ⏭️ SIGUIENTE PRESET
+                        </option>
+
+                        <option value="previous-preset">
+                            ⏮️ PRESET ANTERIOR
+                        </option>
+
+                        <option value="pad-toggle">
+                            🔄 PAD ON / OFF
+                        </option>
+
+                        <option value="blocked">
+                            🚫 BLOQUEAR
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- MIDI VIRTUAL -->
+
+                <div class="mapping-field">
+
+                    <label for="mapping-virtual-input">
+                        NÚMERO MIDI VIRTUAL ISIPAD
+                    </label>
+
+
+                    <div class="mapping-number-control">
+
+                        <button
+                            id="mapping-virtual-minus"
+                            type="button"
+                            class="mapping-number-button"
+                        >
+                            −
+                        </button>
+
+
+                        <input
+                            id="mapping-virtual-input"
+                            type="number"
+                            min="0"
+                            max="127"
+                            value="100"
+                        >
+
+
+                        <button
+                            id="mapping-virtual-plus"
+                            type="button"
+                            class="mapping-number-button"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <small>
+                        Rango MIDI permitido: 0–127.
+                        isiPad reservará preferentemente 100–127
+                        para controles.
+                    </small>
+
+                </div>
+
+
+
+                <!-- BLOQUEAR ORIGINAL -->
+
+                <label class="mapping-checkbox">
+
+                    <input
+                        id="mapping-block-original"
+                        type="checkbox"
+                    >
+
+
+                    <span class="mapping-checkbox-mark"></span>
+
+
+                    <span>
+
+                        <strong>
+                            BLOQUEAR NOTA ORIGINAL
+                        </strong>
+
+                        <small>
+                            Evita que el instrumento reciba
+                            también esta nota.
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+
+                <!-- CONFLICTO -->
+
+                <div
+                    id="mapping-conflict"
+                    class="mapping-conflict hidden"
+                >
+
+                    <strong>
+                        ⚠️ CONFLICTO DE MAPEO
+                    </strong>
+
+                    <span id="mapping-conflict-message">
+                        Esta asignación ya está siendo utilizada.
+                    </span>
+
+                </div>
+
+
+
+                <!-- ACCIONES -->
+
+                <div class="mapping-actions">
+
+                    <button
+                        id="btn-save-mapping"
+                        class="mapping-primary-button"
+                        type="button"
+                    >
+                        💾 GUARDAR MAPEO
+                    </button>
+
+
+                    <button
+                        id="btn-clear-current-mapping"
+                        class="mapping-secondary-button"
+                        type="button"
+                    >
+                        LIMPIAR
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TECLADO VISUAL
+            ================================================== -->
+
+            <section class="mapping-card keyboard-card">
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            VISUALIZACIÓN
+                        </span>
+
+                        <h2>
+                            Controlador
+                        </h2>
+
+                    </div>
+
+
+                    <span id="mapping-last-note">
+                        SIN ACTIVIDAD
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="mapping-visual-keyboard"
+                    class="mapping-visual-keyboard"
+                    aria-label="Representación visual del controlador MIDI"
+                >
+                </div>
+
+
+                <div class="mapping-legend">
+
+                    <span>
+                        <i class="legend-normal"></i>
+                        NORMAL
+                    </span>
+
+
+                    <span>
+                        <i class="legend-pad"></i>
+                        PAD
+                    </span>
+
+
+                    <span>
+                        <i class="legend-function"></i>
+                        FUNCIÓN
+                    </span>
+
+
+                    <span>
+                        <i class="legend-blocked"></i>
+                        BLOQUEADA
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAPA ACTUAL
+            ================================================== -->
+
+            <section class="mapping-card map-card">
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            CONFIGURACIÓN
+                        </span>
+
+                        <h2>
+                            Mapa MIDI actual
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="btn-clear-midi-map"
+                        class="mapping-small-button danger-button"
+                        type="button"
+                    >
+                        LIMPIAR MAPA
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="mapping-list"
+                    class="mapping-list"
+                >
+
+                    <div class="mapping-list-empty">
+                        Todavía no hay controles asignados.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MONITOR MIDI
+            ================================================== -->
+
+            <section class="mapping-card monitor-card">
+
+                <div class="mapping-card-header">
+
+                    <div>
+
+                        <span class="mapping-eyebrow">
+                            DIAGNÓSTICO
+                        </span>
+
+                        <h2>
+                            Monitor MIDI
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="btn-clear-midi-monitor"
+                        class="mapping-small-button"
+                        type="button"
+                    >
+                        LIMPIAR
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="mapping-midi-monitor"
+                    class="mapping-midi-monitor"
+                >
+
+                    <div class="monitor-empty">
+                        Esperando mensajes MIDI...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BARRA INFERIOR MIDI EDITOR
+        ================================================== -->
+
+        <footer class="midi-editor-footer">
+
+
+            <div class="midi-editor-footer-status">
+
+                <span
+                    id="mapping-footer-status-dot"
+                    class="status-dot"
+                ></span>
+
+
+                <span id="mapping-footer-status">
+                    MIDI DESCONECTADO
+                </span>
+
+            </div>
+
+
+            <div class="midi-editor-footer-actions">
+
+                <button
+                    id="btn-reset-midi-map"
+                    class="mapping-secondary-button"
+                    type="button"
+                >
+                    ↻ RESTABLECER
+                </button>
+
+
+                
+        
+
+            </div>
+
+        </footer>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT PRINCIPAL
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
